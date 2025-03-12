@@ -33,7 +33,7 @@ while "  " in text:
     text = text.replace("  ", " ")
 
 # remove punctuation
-for p in ".,!?'-;:_)([]":
+for p in ".,!?'-;:_)([]><":
     text = text.replace(p, "")
 
 # everything is lower case
@@ -44,10 +44,13 @@ count = Counter(text.split(" "))
 
 # select words to be removed
 remove = "can a at an than the to and of in with is this will for that we by as have its these from are on which our be".split()
-remove += "abstract while their but into between they has only over also where other or".split()
-remove += "however such both more all would within us thus if may use due how".split()
+remove += "abstract while their but into between they has only over also where other or one two three".split()
+remove += "however such both more all would within us thus if may use due how it not ii iii".split()
 
 count = {k: v for k, v in count.items() if k not in remove}
+
+# remove single characters
+count = {k: v for k, v in count.items() if len(k) > 1}
 
 # check if number
 def is_number(x):
@@ -63,7 +66,7 @@ wds = sorted([[k, v] for k, v in count.items()], key=lambda x:x[1])[::-1]
 
 for w in wds:
     c = count[w[0]]
-    if c < 50:
+    if c < 1:
         continue
     print(w[0].ljust(50), c)
 
