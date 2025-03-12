@@ -59,6 +59,15 @@ def is_number(x):
 
 count = {k: v for k, v in count.items() if not is_number(k)}
 
+wds = sorted([[k, v] for k, v in count.items()], key=lambda x:x[1])[::-1]
+
+for w in wds:
+    c = count[w[0]]
+    if c < 50:
+        continue
+    print(w[0].ljust(50), c)
+
+
 # now plot
 fig = plt.figure(figsize=(10, 10))
 # remove margins
